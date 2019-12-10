@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose')
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3001;
 const routes = require('./routes')
 
 
@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
+    app.use(express.static("client/public/"));
 }
 // Define API Routes
 app.use(routes)
@@ -22,7 +22,7 @@ app.use(routes)
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+    res.sendFile(path.join(__dirname, "./client/public/index.html"));
 });
 
 //Connect to mongoose
