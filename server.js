@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/public/"));
+    app.use(express.static("client/build"));
 }
 // Define API Routes
 app.use(routes)
@@ -22,7 +22,7 @@ app.use(routes)
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./client/public/index.html"));
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 //Connect to mongoose
